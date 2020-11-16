@@ -1,0 +1,61 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <ActionToContainerMapping>
+      <ActionContainer Id="Edit">
+        <ActionLink ActionId="Delete" Removed="True" />
+      </ActionContainer>
+      <ActionContainer Id="FooterActions">
+        <ActionLink ActionId="Delete" IsNewNode="True" />
+      </ActionContainer>
+    </ActionToContainerMapping>
+  </ActionDesign>
+  <NavigationItems>
+    <Items IsNewNode="True">
+      <Item Id="BookingActualDayNavItem" Caption="Actual Day" ViewId="IBooking_ListView_ActualDay" ImageName="clock" Index="0" IsNewNode="True" />
+      <Item Id="BookingsNavItem" Index="1" Removed="True" />
+      <Item Id="Reports" Index="2" IsNewNode="True" />
+      <Item Id="BookingCompleteNavItem" ViewId="IBooking_ListView" Caption="Complete" ImageName="clock" IsNewNode="True" />
+      <Item Id="Projects" ViewId="IProject_ListView" Caption="Projects" IsNewNode="True" />
+    </Items>
+  </NavigationItems>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="15.2.9.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="IBooking_DetailView" MobileVisible="True" />
+    <ListView Id="IBooking_ListView" MobileVisible="True" ImageName="" GroupSummary="Count;IBooking.TimeDifference:Sum,(: SUM={0});" AutoExpandAllGroups="True" IsGroupPanelVisible="False" DataAccessMode="Client">
+      <Columns>
+        <ColumnInfo Id="Date" GroupIndex="4" DisplayFormat="dddd, dd.MM.yyyy" Caption="Creation Date" />
+        <ColumnInfo Id="Employee" GroupIndex="4" />
+        <ColumnInfo Id="Customer" GroupIndex="3" />
+        <ColumnInfo Id="Project" GroupIndex="2" />
+        <ColumnInfo Id="Task" GroupIndex="1" />
+        <ColumnInfo Id="YearMonth" GroupIndex="6" />
+      </Columns>
+      <Variants Current="BookingList">
+        <Variant Id="BookingList" Index="0" Caption="BookingList" ViewID="IBooking_ListView" IsNewNode="True" />
+        <Variant Id="BookingPivot" Caption="BookingPivot" ViewID="IBooking_ListView_Pivot" IsNewNode="True" />
+      </Variants>
+    </ListView>
+    <ListView Id="IBooking_ListView_ActualDay" MobileVisible="True" ImageName="" GroupSummary="" AutoExpandAllGroups="True" Criteria="[Date] = CurrentDate()" ClassName="JustInTime.Module.BusinessObjects.IBooking" IsNewNode="True">
+      <Columns IsNewNode="True">
+        <ColumnInfo Id="IgnoreWeekendAndHolidays" PropertyName="IgnoreWeekendAndHolidays" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Repetition" PropertyName="Repetition" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="TaskDescription" PropertyName="TaskDescription" Width="70" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Date" PropertyName="Date" Width="70" Index="0" View="" GroupIndex="4" DisplayFormat="dddd, dd.MM.yyyy" Caption="Creation Date" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="EndTime" PropertyName="EndTime" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Employee" PropertyName="Employee" Width="70" Index="3" View="" GroupIndex="4" IsNewNode="True" />
+        <ColumnInfo Id="Customer" PropertyName="Customer" Width="70" Index="4" View="" GroupIndex="3" IsNewNode="True" />
+        <ColumnInfo Id="Project" PropertyName="Project" Width="70" Index="5" View="" GroupIndex="2" IsNewNode="True" />
+        <ColumnInfo Id="Task" PropertyName="Task" Width="70" Index="6" View="" GroupIndex="1" IsNewNode="True" />
+        <ColumnInfo Id="YearMonth" PropertyName="YearMonth" Width="70" Index="7" View="" GroupIndex="6" IsNewNode="True" />
+        <ColumnInfo Id="TimeDifference" PropertyName="TimeDifference" Width="70" Index="8" IsNewNode="True" />
+      </Columns>
+      <Variants Current="" IsNewNode="True" />
+    </ListView>
+    <DetailView Id="IProject_DetailView" MobileVisible="True" />
+    <ListView Id="IProject_ListView" MobileVisible="True" />
+  </Views>
+</Application>

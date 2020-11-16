@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="21d95014-0f41-4dba-a7b6-8194430c899a" ImageMode="UseItemImage" />
+    </Actions>
+  </ActionDesign>
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="12.2.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="12.2.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="IBooking_ListView" IsGroupPanelVisible="True" GroupSummary="" />
+  </Views>
+</Application>

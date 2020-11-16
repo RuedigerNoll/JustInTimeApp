@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <BOModel>
+    <Class Name="JustInTime.Module.BusinessObjects.IAzureDevOpsWorkItem">
+      <OwnMembers>
+        <Member Name="Description" Caption="Beschreibung" />
+        <Member Name="Number" Caption="Workitem No." />
+        <Member Name="ShortDescription" Caption="Kurzbeschreibung" />
+        <Member Name="State" Caption="Status" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+</Application>

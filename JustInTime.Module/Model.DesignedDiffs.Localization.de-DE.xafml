@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="CopyBookingAction" Caption="Zeitbuchung kopieren" />
+      <Action Id="CreateBookingAction" Caption="neue Zeitbuchung" />
+      <Action Id="SaveBookingAsDraftAction" Caption="Als Muster speichern" />
+    </Actions>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="JustInTime.Module.BusinessObjects.IAddress" Caption="Adresse">
+      <OwnMembers>
+        <Member Name="City" Caption="Stadt" />
+        <Member Name="Street" Caption="Strasse" />
+        <Member Name="StreetNumber" Caption="Hausnummer" />
+        <Member Name="Zip" Caption="PLZ" />
+      </OwnMembers>
+    </Class>
+    <Class Name="JustInTime.Module.BusinessObjects.IBooking" Caption="Zeitbuchung">
+      <OwnMembers>
+        <Member Name="Customer" Caption="Kunde" />
+        <Member Name="Date" Caption="Erfassungsdatum" />
+        <Member Name="Employee" Caption="Mitarbeiter" />
+        <Member Name="EndTime" Caption="Endzeit" />
+        <Member Name="IgnoreWeekendAndHolidays" Caption="Wochenende und Feiertage ignorieren" />
+        <Member Name="Project" Caption="Projekt" />
+        <Member Name="StartTime" Caption="Startzeit" />
+        <Member Name="Task" Caption="Tätigkeit" />
+        <Member Name="TaskDescription" Caption="Tätigkeitsbeschreibung" />
+        <Member Name="TimeDifference" Caption="Arbeitszeit" />
+        <Member Name="YearMonth" Caption="Jahr-Monat" />
+      </OwnMembers>
+    </Class>
+    <Class Name="JustInTime.Module.BusinessObjects.ICustomer" Caption="Kunde">
+      <OwnMembers>
+        <Member Name="Address" Caption="Adresse" />
+        <Member Name="Number" Caption="Nummer" />
+        <Member Name="Projects" Caption="Projekte" />
+        <Member Name="RelatedEmployees" Caption="Verknüpfte Mitarbeiter" />
+        <Member Name="ShortName" Caption="Kurzname" />
+      </OwnMembers>
+    </Class>
+    <Class Name="JustInTime.Module.BusinessObjects.IEmployee" Caption="Mitarbeiter">
+      <OwnMembers>
+        <Member Name="DefaultCustomer" Caption="Vorgabe Kunde" />
+        <Member Name="DefaultEndTime" Caption="Vorgabe Endzeit" />
+        <Member Name="DefaultStartTime" Caption="Vorgabe Startzeit" />
+        <Member Name="Number" Caption="Nummer" />
+        <Member Name="RelatedCustomers" Caption="Verknüpfte Kunden" />
+        <Member Name="User" Caption="Benutzer" />
+      </OwnMembers>
+    </Class>
+    <Class Name="JustInTime.Module.BusinessObjects.IProject" Caption="Projekt">
+      <OwnMembers>
+        <Member Name="CustomerRef" Caption="Kundenreferenz" />
+        <Member Name="Default" Caption="Vorgabe" />
+        <Member Name="Number" Caption="Nummer" />
+      </OwnMembers>
+    </Class>
+    <Class Name="JustInTime.Module.BusinessObjects.ITask" Caption="Tätigkeit">
+      <OwnMembers>
+        <Member Name="Default" Caption="Vorgabe" />
+        <Member Name="Number" Caption="Nummer" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <Localization>
+    <LocalizationGroup Name="Texts">
+      <LocalizationItem Name="NO_EMPLOYEE_SELECTED" Value="Es wurde kein Mitarbeiter ausgewählt" />
+    </LocalizationGroup>
+  </Localization>
+  <NavigationItems>
+    <Items>
+      <Item Id="BookingsNavItem" Caption="Zeitbuchungen">
+        <Items>
+          <Item Id="BookingActualDayNavItem" Caption="Aktueller Tag" />
+          <Item Id="BookingCompleteNavItem" Caption="Alle" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Views>
+    <ListView Id="IBooking_ListView">
+      <Columns>
+        <ColumnInfo Id="Date" Caption="Erfassungsdatum" />
+      </Columns>
+    </ListView>
+    <ListView Id="IBooking_ListView_ActualDay">
+      <Columns>
+        <ColumnInfo Id="Date" Caption="Erfassungsdatum" />
+      </Columns>
+    </ListView>
+    <ListView Id="IBooking_ListView_Pivot">
+      <Columns>
+        <ColumnInfo Id="Date" Caption="Erfassungsdatum" />
+      </Columns>
+    </ListView>
+  </Views>
+</Application>

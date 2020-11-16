@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Company="Aragon IT Service GmbH" Title="JustInTime" WebSite="www.aragonitservices.de" Logo="BO_Skull">
+  <ActionDesign>
+    <Actions>
+      <Action Id="21d95014-0f41-4dba-a7b6-8194430c899a" ImageMode="UseActionImage" />
+      <Action Id="954f29be-bd46-4d01-b661-4cfc30f5ecf6" ImageName="clock" />
+    </Actions>
+  </ActionDesign>
+  <BOModel>
+    <Class Name="JustInTime.Module.BusinessObjects.IBooking" DefaultDetailViewImage="clock" DefaultListViewImage="clock" ImageName="clock" />
+  </BOModel>
+  <NavigationItems>
+    <Items>
+      <Item Id="Konfiguration" Index="1" />
+      <Item Id="Default" Index="2" />
+    </Items>
+  </NavigationItems>
+  <Options FormStyle="Ribbon" />
+  <SchemaModules>
+    <SchemaModule Name="SystemModule" Version="12.2.10.0" IsNewNode="True" />
+    <SchemaModule Name="SystemWindowsFormsModule" Version="12.2.10.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <DetailView Id="AuthenticationStandardLogonParameters_DetailView" ImageName="clock">
+      <Items>
+        <StaticImage Id="LogonImage" ImageName="BO_Security_Permission" Caption="Please login with username und password" HorizontalAlign="Center" />
+      </Items>
+    </DetailView>
+    <ListView Id="IBooking_ListView_Pivot" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Win.PivotGridListEditor" />
+  </Views>
+</Application>

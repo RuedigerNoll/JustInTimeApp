@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <ActionDesign>
+    <Actions>
+      <Action Id="21d95014-0f41-4dba-a7b6-8194430c899a" Caption="Import WinOffice Tätigkeiten" />
+    </Actions>
+  </ActionDesign>
+</Application>

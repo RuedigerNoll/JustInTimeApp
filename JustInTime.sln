@@ -1,0 +1,113 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustInTime.Module", "JustInTime.Module\JustInTime.Module.csproj", "{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustInTime.Module.Win", "JustInTime.Module.Win\JustInTime.Module.Win.csproj", "{0BA3D2B9-C507-4B4F-B552-591C99C8759B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustInTime.Win", "JustInTime.Win\JustInTime.Win.csproj", "{19486A7D-2DD3-4897-BE36-2E119A251178}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustInTime.Module.Web", "JustInTime.Module.Web\JustInTime.Module.Web.csproj", "{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JustInTime.Web", "JustInTime.Web\JustInTime.Web.csproj", "{B2B3B17D-763A-4C30-9C18-015E2A70112C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Debug32|Any CPU = Debug32|Any CPU
+		Debug32|x86 = Debug32|x86
+		EasyTest|Any CPU = EasyTest|Any CPU
+		EasyTest|x86 = EasyTest|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Debug32|x86.ActiveCfg = Debug|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.EasyTest|Any CPU.ActiveCfg = EasyTest|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.EasyTest|Any CPU.Build.0 = EasyTest|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.EasyTest|x86.ActiveCfg = EasyTest|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{87FA587E-B3B3-4E6A-8E74-CADD167CB7D5}.Release|x86.ActiveCfg = Release|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Debug32|x86.ActiveCfg = Debug|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.EasyTest|Any CPU.ActiveCfg = EasyTest|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.EasyTest|Any CPU.Build.0 = EasyTest|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.EasyTest|x86.ActiveCfg = EasyTest|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BA3D2B9-C507-4B4F-B552-591C99C8759B}.Release|x86.ActiveCfg = Release|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Debug32|x86.ActiveCfg = Debug|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.EasyTest|Any CPU.ActiveCfg = EasyTest|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.EasyTest|Any CPU.Build.0 = EasyTest|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.EasyTest|x86.ActiveCfg = EasyTest|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19486A7D-2DD3-4897-BE36-2E119A251178}.Release|x86.ActiveCfg = Release|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Debug32|x86.ActiveCfg = Debug|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.EasyTest|Any CPU.ActiveCfg = EasyTest|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.EasyTest|Any CPU.Build.0 = EasyTest|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.EasyTest|x86.ActiveCfg = EasyTest|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC000141-AC67-475C-BC24-C8A4DDC1E8ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Debug32|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Debug32|Any CPU.Build.0 = Debug|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Debug32|x86.ActiveCfg = Debug|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.EasyTest|Any CPU.ActiveCfg = EasyTest|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.EasyTest|Any CPU.Build.0 = EasyTest|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.EasyTest|x86.ActiveCfg = EasyTest|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2B3B17D-763A-4C30-9C18-015E2A70112C}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs2013:8080/tfs/teamprojekte2010
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = JustInTime.Module.Web\\JustInTime.Module.Web.csproj
+		SccProjectName1 = JustInTime.Module.Web
+		SccLocalPath1 = JustInTime.Module.Web
+		SccProjectUniqueName2 = JustInTime.Module.Win\\JustInTime.Module.Win.csproj
+		SccProjectName2 = JustInTime.Module.Win
+		SccLocalPath2 = JustInTime.Module.Win
+		SccProjectUniqueName3 = JustInTime.Module\\JustInTime.Module.csproj
+		SccProjectName3 = JustInTime.Module
+		SccLocalPath3 = JustInTime.Module
+		SccProjectUniqueName4 = JustInTime.Web\\JustInTime.Web.csproj
+		SccProjectName4 = JustInTime.Web
+		SccLocalPath4 = JustInTime.Web
+		SccProjectUniqueName5 = JustInTime.Win\\JustInTime.Win.csproj
+		SccProjectName5 = JustInTime.Win
+		SccLocalPath5 = JustInTime.Win
+	EndGlobalSection
+EndGlobal
