@@ -30,73 +30,48 @@ namespace JustInTime.Module.Win.Controllers
             TargetObjectType = typeof(IBooking);
         }
 
+
         /// <summary>
-        /// 
+        /// Start Dialog to select export parameters
         /// </summary>
-        private void ShowSelectEmployeeDialog()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void exportEmployeeBookings_Execute(object sender, SimpleActionExecuteEventArgs e)
         {
             _objectSpace = ObjectSpace.CreateNestedObjectSpace();
 
-            var detailView = Application.CreateDetailView(_objectSpace, new SelectExportBookingParameters());
+            var currentUser = _objectSpace.GetObject(SecuritySystem.CurrentUser);
 
-            var parameters = new ShowViewParameters(detailView)
-            {
-                TargetWindow = TargetWindow.NewModalWindow,
-                Context = TemplateContext.PopupWindow
-            };
+            var dialog = new SelectExportBookingParameters();
+            dialog.Employee = _objectSpace.FindObject<IEmployee>(CriteriaOperator.Parse("User = ?", currentUser));
 
-            var dialogController = new DialogController {SaveOnAccept = false};
+            var detailView = Application.CreateDetailView(_objectSpace, dialog);
 
-            dialogController.AcceptAction.Caption = CaptionHelper.GetLocalizedText("DialogButtons", "Ok", "Ok");
-            dialogController.CancelAction.Caption = CaptionHelper.GetLocalizedText("DialogButtons", "Cancel", "Cancel");
-
-            dialogController.AcceptAction.ActionMeaning = ActionMeaning.Accept;
-            dialogController.CancelAction.ActionMeaning = ActionMeaning.Cancel;
-
-            dialogController.CanCloseWindow = true;
-
-            dialogController.Accepting += dialogController_Accepting;
-            dialogController.Cancelling += dialogController_Cancelling;
-
-            parameters.Controllers.Add(dialogController);
-            Application.ShowViewStrategy.ShowView(parameters, new ShowViewSource(Frame, null));
+            Application.ShowViewStrategy.ShowViewInPopupWindow(detailView,
+                () => 
+                { 
+                    Exporting(dialog); 
+                    Application.ShowViewStrategy.ShowMessage("Daten wurden exportiert", InformationType.Success, 3000, InformationPosition.Right); 
+                },
+                () => { DialogCanceled(); },
+                "Exportieren",
+                "Abbrechen"
+             );
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        void dialogController_Cancelling(object sender, EventArgs e)
+        private void Exporting(SelectExportBookingParameters selectedExportParameters)
         {
-            return;
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void dialogController_Accepting(object sender, DialogControllerAcceptingEventArgs e)
-        {
-            var dialogController = sender as DialogController;
-
-            if (dialogController == null)
-                return;
-
-            var selectedExportParameters = dialogController.Window.View.CurrentObject as SelectExportBookingParameters;
-
             if (selectedExportParameters == null)
                 return;
 
             if (selectedExportParameters.Employee == null)
             {
                 MessageBox.Show(CaptionHelper.GetLocalizedText("Texts", "NO_EMPLOYEE_SELECTED"),
-                                CaptionHelper.GetLocalizedText("Texts", "Error"), 
+                                CaptionHelper.GetLocalizedText("Texts", "Error"),
                                 MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
-            
+
             var firstDayOfMonth = selectedExportParameters.ExportStart;
             var lastDayOfMonth = selectedExportParameters.ExportEnd;
 
@@ -108,21 +83,17 @@ namespace JustInTime.Module.Win.Controllers
 
             var bookings = _objectSpace.GetObjects<IBooking>(bookingCriteria);
 
-            if (!bookings.Any()) 
+            if (!bookings.Any())
                 return;
 
             var saveFolder = SelectFolderToSaveBookingExport();
-            //if (saveFolder != null)
-            //    BookingExporter.Export(_objectSpace, saveFolder, bookings);
-
             if (saveFolder != null)
-                BookingExporter.ExportTimeStampClock(_objectSpace, Path.GetTempPath(), bookings);
-
+                BookingExporter.ExportJdcBooking(_objectSpace, saveFolder, bookings);
         }
 
-        private void exportEmployeeBookings_Execute(object sender, SimpleActionExecuteEventArgs e)
+        private void DialogCanceled()
         {
-            ShowSelectEmployeeDialog();
+            return;
         }
 
         /// <summary>

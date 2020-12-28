@@ -4,6 +4,9 @@
     <Actions>
       <Action Id="21d95014-0f41-4dba-a7b6-8194430c899a" ImageMode="UseActionImage" />
     </Actions>
+    <Actions Id="Actions">
+      <Action Id="954f29be-bd46-4d01-b661-4cfc30f5ecf6" ImageName="clock" />
+    </Actions>
   </ActionDesign>
   <BOModel>
     <Class Name="JustInTime.Module.BusinessObjects.IBooking" DefaultDetailViewImage="clock" DefaultListViewImage="clock" ImageName="clock" />
@@ -34,6 +37,20 @@
         <StaticImage Id="LogonImage" ImageName="BO_Security_Permission" Caption="Please login with username und password" HorizontalAlign="Center" />
       </Items>
     </DetailView>
+    <ListView Id="IBooking_ListView_ActualDay" IsGroupPanelVisible="True" GroupSummary="">
+      <Columns>
+        <ColumnInfo Id="Customer" SortOrder="None" GroupIndex="-1" Index="-1" />
+        <ColumnInfo Id="Date" SortOrder="None" GroupIndex="-1" Index="-1" />
+        <ColumnInfo Id="Employee" SortOrder="None" Index="-1" GroupIndex="-1" />
+        <ColumnInfo Id="Project" SortOrder="None" GroupIndex="-1" Index="-1" />
+        <ColumnInfo Id="YearMonth" SortOrder="None" GroupIndex="-1" Index="-1" />
+        <ColumnInfo Id="StartTime" Width="146" Index="0" />
+        <ColumnInfo Id="EndTime" Index="1" />
+        <ColumnInfo Id="TimeDifference" Index="2" />
+        <ColumnInfo Id="Task" SortOrder="None" GroupIndex="-1" Index="3" />
+        <ColumnInfo Id="TaskDescription" Index="4" />
+      </Columns>
+    </ListView>
     <ListView Id="IBooking_ListView_Pivot" EditorTypeName="DevExpress.ExpressApp.PivotGrid.Win.PivotGridListEditor" />
   </Views>
 </Application>

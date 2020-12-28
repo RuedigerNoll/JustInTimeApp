@@ -198,5 +198,32 @@ namespace JustInTime.Module.Controllers
             _currentObjectSpace.CommitChanges();
             ObjectSpace.Refresh();
         }
+
+        private void CopyBooking_Execute(object sender, SimpleActionExecuteEventArgs e)
+        {
+            var bookingToCopy = e.CurrentObject as IBooking;
+
+            if (bookingToCopy == null)
+                return;
+
+            _currentObjectSpace = Application.CreateObjectSpace();
+
+            var newBooking = _currentObjectSpace.CreateObject<IBooking>();
+            bookingToCopy = _currentObjectSpace.GetObject(bookingToCopy);
+
+            newBooking.Customer = bookingToCopy.Customer;
+            newBooking.Date = DateTime.Today;
+            newBooking.Employee = bookingToCopy.Employee;
+            newBooking.StartTime = bookingToCopy.StartTime;
+            newBooking.EndTime = bookingToCopy.EndTime;
+            newBooking.IgnoreWeekendAndHolidays = bookingToCopy.IgnoreWeekendAndHolidays;
+            newBooking.Project = bookingToCopy.Project;
+            newBooking.Repetition = bookingToCopy.Repetition;
+            newBooking.Task = bookingToCopy.Task;
+            newBooking.TaskDescription = bookingToCopy.TaskDescription;
+
+            _currentObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
+        }
     }
 }

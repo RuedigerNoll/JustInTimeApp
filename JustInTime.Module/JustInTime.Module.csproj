@@ -172,6 +172,7 @@
     <Compile Include="BusinessObjects\ITask.cs" />
     <Compile Include="BusinessObjects\IToDo.cs" />
     <Compile Include="BusinessObjects\IToDoStatus.cs" />
+    <Compile Include="BusinessObjects\JdcBooking.cs" />
     <Compile Include="BusinessObjects\SelectExportBookingParameters.cs" />
     <Compile Include="BusinessObjects\TimeStampClock.cs" />
     <Compile Include="Controllers\BookingViewController.cs">
@@ -233,6 +234,10 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="UnusableNodes1.xml">
+      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="clock4.png" />
     <Content Include="FunctionalTests\Config.xml" />
     <EmbeddedResource Include="Images\Office-excel-csv-icon.png" />

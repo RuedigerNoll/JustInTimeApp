@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application>
+  <Views Id="Views">
+    <Views Id="Views@fb67b48b-ac39-4375-9c15-d25dae335682" UnusableNodeName="Views">
+      <ListView Id="IBooking_ListView_ActualDay">
+        <Variants Current="BookingList" />
+      </ListView>
+    </Views>
+    <ListView Id="IBooking_ListView_ActualDay">
+      <Variants Id="Variants" Current="BookingList" />
+    </ListView>
+  </Views>
+</Application>

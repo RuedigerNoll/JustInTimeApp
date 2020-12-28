@@ -63,14 +63,15 @@ namespace JustInTime.Module.Controllers
             // CopyBooking
             // 
             this.CopyBooking.Caption = "Copy Booking";
-            this.CopyBooking.Category = "Menu";
             this.CopyBooking.ConfirmationMessage = null;
             this.CopyBooking.Id = "CopyBookingAction";
+            this.CopyBooking.ImageName = "Action_Copy";
             this.CopyBooking.SelectionDependencyType = DevExpress.ExpressApp.Actions.SelectionDependencyType.RequireSingleObject;
             this.CopyBooking.TargetObjectType = typeof(JustInTime.Module.BusinessObjects.IBooking);
             this.CopyBooking.TargetViewType = DevExpress.ExpressApp.ViewType.ListView;
-            this.CopyBooking.ToolTip = null;
+            this.CopyBooking.ToolTip = "Dupliziert die ausgewählte Buchung mit dem aktuellen Datum";
             this.CopyBooking.TypeOfView = typeof(DevExpress.ExpressApp.ListView);
+            this.CopyBooking.Execute += new DevExpress.ExpressApp.Actions.SimpleActionExecuteEventHandler(this.CopyBooking_Execute);
             // 
             // CloneBooking
             // 

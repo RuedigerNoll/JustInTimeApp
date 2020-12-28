@@ -13,7 +13,43 @@ namespace JustInTime.Module.HelperClasses
         private static IObjectSpace _objectSpace;
 
         /// <summary>
-        /// 
+        /// Erzeugt Liste von Buchungen mmit Start  und Endzeit, pro Tag nur eine Buchung
+        /// </summary>
+        /// <param name="objectSpace"></param>
+        /// <param name="folderToSave"></param>
+        /// <param name="bookings"></param>
+        public static void ExportJdcBooking(IObjectSpace objectSpace, string folderToSave, IList<IBooking> bookings)
+        {
+            _objectSpace = objectSpace;
+
+            var csvExport = new CsvExport(";");
+
+            var groupedBookingList = from booking in bookings
+                                     group booking by booking.Date into newBooking
+                                     orderby newBooking.Key ascending
+                                     select newBooking;
+
+            var employee = bookings.FirstOrDefault()?.Employee;
+
+            foreach (var item in groupedBookingList)
+            {
+                AddJdcBookingRow(csvExport,
+
+                    new JdcBooking
+                    {
+                        Date = item.Key,
+                        PersonnelNumber = employee.Number,
+                        EmployeeName = $"{employee.Name.Split(' ').Last()}, {employee.Name.Split(' ').First()}",
+                        StartTime = item.OrderBy(i => i.StartTime).FirstOrDefault().StartTime,
+                        EndTime = item.OrderBy(i => i.StartTime).LastOrDefault().EndTime
+                    }
+                    );
+            }
+            csvExport.ExportToFile($@"{folderToSave}\book_csv_{bookings.FirstOrDefault().Date:yyyy_MM}_{Guid.NewGuid()}.csv");
+        }
+
+        /// <summary>
+        /// Export der aller Buchungen, für die damalige RBA Zeiterfassung
         /// </summary>
         /// <param name="objectSpace"></param>
         /// <param name="folderToSave" />
@@ -39,6 +75,12 @@ namespace JustInTime.Module.HelperClasses
             csvExport.ExportToFile($@"{folderToSave}\book_csv_{Guid.NewGuid()}.csv");
         }
 
+        /// <summary>
+        /// Export für IOS App der Buchungen, Ausgabe Json Format
+        /// </summary>
+        /// <param name="objectSpace"></param>
+        /// <param name="folderToSave"></param>
+        /// <param name="bookings"></param>
         public static void ExportTimeStampClock(IObjectSpace objectSpace, string folderToSave, IList<IBooking> bookings)
         {
             _objectSpace = objectSpace;
@@ -60,9 +102,20 @@ namespace JustInTime.Module.HelperClasses
             var json = JsonConvert
                 .SerializeObject(exportBookings);
 
-            File.WriteAllText(folderToSave, $"book_json_{Guid.NewGuid()}.json");
+            File.WriteAllText(folderToSave, $"book_json_{bookings.FirstOrDefault()?.Date:yyy_MM}_{Guid.NewGuid()}.json");
         }
 
+        private static void AddJdcBookingRow(CsvExport csvExport,
+            JdcBooking booking)
+        {
+            csvExport.AddRow();
+            csvExport["Datum"] = $"{booking.Date.ToShortDateString()}";
+            csvExport["Personalnummer"] = $"{booking.PersonnelNumber}";
+            csvExport["Name"] = $"{booking.EmployeeName}";
+            csvExport["Kommt"] = $"{booking.StartTime}";
+            csvExport["Geht"] = $"{booking.EndTime}";
+
+        }
         /// <summary>
         /// 
         /// </summary>

@@ -33,34 +33,44 @@
     <SchemaModule Name="SystemModule" Version="16.2.6.0" IsNewNode="True" />
   </SchemaModules>
   <Views>
-    <ListView Id="IBooking_ListView" ImageName="" GroupSummary="Count;IBooking.TimeDifference:Sum,(: SUM={0});" AutoExpandAllGroups="True" IsGroupPanelVisible="False" DataAccessMode="Client">
+    <Views Id="Views">    
+    <ListView Id="IBooking_ListView_ActualDay">
+      <Variants Id="Variants" Current="BookingList" />
+    </ListView>
+  </Views>
+    <ListView Id="IBooking_ListView" ImageName="" GroupSummary="Empty" AutoExpandAllGroups="True" IsGroupPanelVisible="True" DataAccessMode="Client">
       <Columns>
-        <ColumnInfo Id="Date" GroupIndex="4" DisplayFormat="dddd, dd.MM.yyyy" Caption="Creation Date" />
-        <ColumnInfo Id="Employee" GroupIndex="4" />
-        <ColumnInfo Id="Customer" GroupIndex="3" />
-        <ColumnInfo Id="Project" GroupIndex="2" />
-        <ColumnInfo Id="Task" GroupIndex="1" />
-        <ColumnInfo Id="YearMonth" GroupIndex="6" />
+        <ColumnInfo Id="Customer" GroupIndex="-1" SortOrder="None" Index="-1" />
+        <ColumnInfo Id="Date" GroupIndex="1" DisplayFormat="dddd, dd.MM.yyyy" Caption="Creation Date" SortOrder="Descending" Index="-1" />
+        <ColumnInfo Id="Employee" GroupIndex="-1" SortOrder="None" Index="-1" />
+        <ColumnInfo Id="Project" GroupIndex="-1" SortOrder="None" Index="-1" />
+        <ColumnInfo Id="StartTime" Width="146" Index="0" SortIndex="-1" SortOrder="None" />
+        <ColumnInfo Id="EndTime" Index="1" SortIndex="0" SortOrder="Ascending" />
+        <ColumnInfo Id="TimeDifference" Index="2" />
+        <ColumnInfo Id="WorkItem" Index="3" />
+        <ColumnInfo Id="Task" GroupIndex="-1" SortOrder="None" Index="4" />
+        <ColumnInfo Id="YearMonth" GroupIndex="0" SortOrder="Descending" Index="5" />
+        <ColumnInfo Id="TaskDescription" Index="6" />
       </Columns>
       <Variants Current="BookingList">
         <Variant Id="BookingList" ViewID="IBooking_ListView" Index="0" Caption="BookingList" IsNewNode="True" />
         <Variant Id="BookingPivot" ViewID="IBooking_ListView_Pivot" Caption="BookingPivot" IsNewNode="True" />
       </Variants>
     </ListView>
-    <ListView Id="IBooking_ListView_ActualDay" ClassName="JustInTime.Module.BusinessObjects.IBooking" ImageName="" GroupSummary="" AutoExpandAllGroups="True" Criteria="[Date] = CurrentDate()" IsNewNode="True">
+    <ListView Id="IBooking_ListView_ActualDay" ClassName="JustInTime.Module.BusinessObjects.IBooking" ImageName="" GroupSummary="" AutoExpandAllGroups="True" Criteria="[Date] = CurrentDate()" IsGroupPanelVisible="True" IsNewNode="True">
       <Columns IsNewNode="True">
+        <ColumnInfo Id="Customer" PropertyName="Customer" Width="70" Index="-1" View="" GroupIndex="-1" SortOrder="None" IsNewNode="True" />
+        <ColumnInfo Id="Date" PropertyName="Date" Width="70" Index="-1" View="" GroupIndex="-1" DisplayFormat="dddd, dd.MM.yyyy" Caption="Creation Date" SortOrder="None" IsNewNode="True" />
+        <ColumnInfo Id="Employee" PropertyName="Employee" Width="70" Index="-1" View="" GroupIndex="-1" SortOrder="None" IsNewNode="True" />
         <ColumnInfo Id="IgnoreWeekendAndHolidays" PropertyName="IgnoreWeekendAndHolidays" Width="50" Index="-1" IsNewNode="True" />
+        <ColumnInfo Id="Project" PropertyName="Project" Width="70" Index="-1" View="" GroupIndex="-1" SortOrder="None" IsNewNode="True" />
         <ColumnInfo Id="Repetition" PropertyName="Repetition" Width="50" Index="-1" IsNewNode="True" />
-        <ColumnInfo Id="TaskDescription" PropertyName="TaskDescription" Width="70" Index="-1" IsNewNode="True" />
-        <ColumnInfo Id="Date" PropertyName="Date" Width="70" Index="0" View="" GroupIndex="4" DisplayFormat="dddd, dd.MM.yyyy" Caption="Creation Date" IsNewNode="True" />
-        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="70" Index="1" IsNewNode="True" />
-        <ColumnInfo Id="EndTime" PropertyName="EndTime" Width="70" Index="2" IsNewNode="True" />
-        <ColumnInfo Id="Employee" PropertyName="Employee" Width="70" Index="3" View="" GroupIndex="4" IsNewNode="True" />
-        <ColumnInfo Id="Customer" PropertyName="Customer" Width="70" Index="4" View="" GroupIndex="3" IsNewNode="True" />
-        <ColumnInfo Id="Project" PropertyName="Project" Width="70" Index="5" View="" GroupIndex="2" IsNewNode="True" />
-        <ColumnInfo Id="Task" PropertyName="Task" Width="70" Index="6" View="" GroupIndex="1" IsNewNode="True" />
-        <ColumnInfo Id="YearMonth" PropertyName="YearMonth" Width="70" Index="7" View="" GroupIndex="6" IsNewNode="True" />
-        <ColumnInfo Id="TimeDifference" PropertyName="TimeDifference" Width="70" Index="8" IsNewNode="True" />
+        <ColumnInfo Id="YearMonth" PropertyName="YearMonth" Width="70" Index="-1" View="" GroupIndex="-1" SortOrder="None" IsNewNode="True" />
+        <ColumnInfo Id="StartTime" PropertyName="StartTime" Width="146" Index="0" IsNewNode="True" />
+        <ColumnInfo Id="EndTime" PropertyName="EndTime" Width="70" Index="1" IsNewNode="True" />
+        <ColumnInfo Id="TimeDifference" PropertyName="TimeDifference" Width="70" Index="2" IsNewNode="True" />
+        <ColumnInfo Id="Task" PropertyName="Task" Width="70" Index="3" View="" GroupIndex="-1" SortOrder="None" IsNewNode="True" />
+        <ColumnInfo Id="TaskDescription" PropertyName="TaskDescription" Width="70" Index="4" IsNewNode="True" />
       </Columns>
       <Variants Current="BookingList" IsNewNode="True" />
     </ListView>
