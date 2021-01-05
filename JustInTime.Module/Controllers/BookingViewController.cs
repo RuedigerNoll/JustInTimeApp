@@ -47,7 +47,7 @@ namespace JustInTime.Module.Controllers
 
             var booking = _currentObjectSpace.CreateObject<IBooking>();
 
-            if (bookings != null && bookings.Count() > 0)
+            if (bookings.Any())
             {
                 var lastEndTime = bookings.Max(b => b.EndTime);
                 booking.StartTime = lastEndTime;
@@ -55,8 +55,66 @@ namespace JustInTime.Module.Controllers
                 booking.Date = editDate;
             }
 
+            //Show(_currentObjectSpace, booking);
             ShowBookingDialog(_currentObjectSpace, booking);
-             
+        }
+
+        private void Show(IObjectSpace objectSpace, IBooking booking)
+        {
+            var detailView = Application.CreateDetailView(objectSpace, booking);
+
+            Application.ShowViewStrategy.ShowViewInPopupWindow(detailView,
+                () =>
+                {
+                    SaveBooking(booking);
+                },
+                () => { DialogCanceled(); },
+                "Speichern",
+                "Abbrechen"
+             );
+        }
+
+        private void SaveBooking(IBooking booking)
+        {
+            int j = 0;
+            DateTime nextDate = booking.Date;
+
+            NextFinancialDate(booking, ref j, ref nextDate);
+            booking.Date = nextDate;
+
+            if (booking.Repetition > 1)
+            {
+                j = 1;
+                for (int i = 1; i < booking.Repetition; i++)
+                {
+                    var nextBooking = _currentObjectSpace.CreateObject<IBooking>();
+                    nextBooking.Project = booking.Project;
+                    nextBooking.StartTime = booking.StartTime;
+                    nextBooking.Task = booking.Task;
+                    nextBooking.TaskDescription = booking.TaskDescription;
+                    nextBooking.Customer = booking.Customer;
+                    nextBooking.Employee = booking.Employee;
+
+                    nextDate = booking.Date.AddDays(j);
+
+                    NextFinancialDate(booking, ref j, ref nextDate);
+
+                    nextBooking.Date = nextDate;
+                    nextBooking.EndTime = booking.EndTime;
+                    j++;
+                }
+
+                _currentObjectSpace.CommitChanges();
+                ObjectSpace.CommitChanges();
+                ObjectSpace.Refresh();
+            }
+
+            return;
+        }
+
+        private void DialogCanceled()
+        {
+            return;
         }
 
         /// <summary>

@@ -234,10 +234,6 @@
     <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="UnusableNodes1.xml">
-      <DependentUpon>Model.DesignedDiffs.xafml</DependentUpon>
-      <SubType>Designer</SubType>
-    </None>
     <None Include="clock4.png" />
     <Content Include="FunctionalTests\Config.xml" />
     <EmbeddedResource Include="Images\Office-excel-csv-icon.png" />
