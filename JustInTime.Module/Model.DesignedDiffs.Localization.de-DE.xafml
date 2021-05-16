@@ -61,6 +61,7 @@
       <OwnMembers>
         <Member Name="Default" Caption="Vorgabe" />
         <Member Name="Number" Caption="Nummer" />
+        <Member Name="DefaultTaskDescription" Caption="Vorgabe für Beschreibung" />
       </OwnMembers>
     </Class>
   </BOModel>

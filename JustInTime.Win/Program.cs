@@ -1,22 +1,18 @@
 using System;
 using System.Configuration;
+using System.Diagnostics;
 using System.Windows.Forms;
-
-using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Security;
-using DevExpress.ExpressApp.Win;
-using DevExpress.Persistent.Base;
-using DevExpress.Persistent.BaseImpl;
 
 namespace JustInTime.Win
 {
-    static class Program
+    internal static class Program
     {
         /// <summary>
-        /// The main entry point for the application.
+        ///     The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        private static void Main()
         {
 #if EASYTEST
 			DevExpress.ExpressApp.Win.EasyTest.EasyTestRemotingRegistration.Register();
@@ -24,17 +20,17 @@ namespace JustInTime.Win
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            EditModelPermission.AlwaysGranted = System.Diagnostics.Debugger.IsAttached;
-            JustInTimeWindowsFormsApplication winApplication = new JustInTimeWindowsFormsApplication();
+            EditModelPermission.AlwaysGranted = Debugger.IsAttached;
+            var winApplication = new JustInTimeWindowsFormsApplication();
 #if EASYTEST
 			if(ConfigurationManager.ConnectionStrings["EasyTestConnectionString"] != null) {
-				winApplication.ConnectionString = ConfigurationManager.ConnectionStrings["EasyTestConnectionString"].ConnectionString;
+				winApplication.ConnectionString =
+ ConfigurationManager.ConnectionStrings["EasyTestConnectionString"].ConnectionString;
 			}
 #endif
             if (ConfigurationManager.ConnectionStrings["ConnectionString"] != null)
-            {
-                winApplication.ConnectionString = ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
-            }
+                winApplication.ConnectionString =
+                    ConfigurationManager.ConnectionStrings["ConnectionString"].ConnectionString;
             try
             {
                 winApplication.SplashScreen = new JustInTimeSplashScreen();

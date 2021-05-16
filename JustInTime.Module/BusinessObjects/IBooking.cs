@@ -1,13 +1,12 @@
 using System;
 using System.Linq;
-using System.Collections.Generic;
+using DevExpress.Data.Filtering;
+using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.DC;
+using DevExpress.ExpressApp.Xpo;
 using DevExpress.Persistent.Base;
 using DevExpress.Persistent.Validation;
-using DevExpress.ExpressApp.Xpo;
-using DevExpress.Data.Filtering;
-using DevExpress.ExpressApp.Security.Strategy;
-using DevExpress.ExpressApp;
+using DevExpress.Xpo;
 
 namespace JustInTime.Module.BusinessObjects
 {
@@ -16,38 +15,33 @@ namespace JustInTime.Module.BusinessObjects
     //[NavigationItem("Zeiterfassung")]
     [VisibleInReports(true)]
     public interface IBooking
-    {        
-        [RuleRequiredField]
-        DateTime Date { get; set; }
-        
-        [RuleRequiredField]
-        TimeSpan StartTime { get; set; }
-                
-        [RuleRequiredField]
-        TimeSpan EndTime { get; set; }
+    {
+        [RuleRequiredField] DateTime Date { get; set; }
+
+        [RuleRequiredField] TimeSpan StartTime { get; set; }
+
+        [RuleRequiredField] TimeSpan EndTime { get; set; }
 
         [RuleRequiredField]
-        [DevExpress.Xpo.Delayed]
-        [DevExpress.Xpo.Custom("AllowEdit", "false")]
+        [Delayed]
+        [Custom("AllowEdit", "false")]
         IEmployee Employee { get; set; }
 
         [RuleRequiredField]
-        [DevExpress.Xpo.Delayed]
+        [Delayed]
         [DataSourceProperty("Employee.RelatedCustomers")]
         ICustomer Customer { get; set; }
 
         [RuleRequiredField]
         [DataSourceProperty("Customer.Projects")]
-        [DevExpress.Xpo.Delayed]
+        [Delayed]
         IProject Project { get; set; }
 
         [RuleRequiredField]
-        [DevExpress.Xpo.Delayed]
         [ImmediatePostData]
         ITask Task { get; set; }
 
-        [FieldSize(2048)]
-        string TaskDescription { get; set; }
+        [FieldSize(2048)] string TaskDescription { get; set; }
 
         IAzureDevOpsWorkItem WorkItem { get; set; }
 
@@ -71,11 +65,11 @@ namespace JustInTime.Module.BusinessObjects
     [DomainLogic(typeof(IBooking))]
     public class BookingLogic
     {
-        int repetition;
-        bool ignoreWeekendAndHolidays;
+        private bool _ignoreWeekendAndHolidays;
+        private int _repetition;
 
         public void AfterConstruction(IBooking instance)
-        {            
+        {
             var objectSpace = XPObjectSpace.FindObjectSpaceByObject(instance);
 
             if (!objectSpace.IsNewObject(instance)) return;
@@ -83,12 +77,12 @@ namespace JustInTime.Module.BusinessObjects
             var currentUser = objectSpace.GetObject(SecuritySystem.CurrentUser);
             var currentEmployee = objectSpace.FindObject<IEmployee>(
                 CriteriaOperator.Parse("User = ?", currentUser));
-            
+
 
             instance.Date = DateTime.Today;
             instance.Employee = currentEmployee;
             instance.Repetition = 1;
-                        
+
             instance.StartTime = currentEmployee.DefaultStartTime;
             instance.EndTime = currentEmployee.DefaultEndTime;
             instance.Customer = currentEmployee.DefaultCustomer;
@@ -96,8 +90,8 @@ namespace JustInTime.Module.BusinessObjects
             if (instance.Customer != null)
             {
                 var projects = from p in instance.Customer.Projects
-                               where p.Default
-                               select p;
+                    where p.Default
+                    select p;
                 instance.Project = projects.FirstOrDefault();
             }
 
@@ -109,7 +103,18 @@ namespace JustInTime.Module.BusinessObjects
             if (value == null)
                 return;
 
-            if (string.IsNullOrEmpty(instance.TaskDescription) || (instance.Task != null && instance.TaskDescription.Equals(instance.Task.Name)))
+            if (string.IsNullOrEmpty(instance.TaskDescription) ||
+                instance.Task != null && instance.TaskDescription.Equals(instance.Task.Name))
+                instance.TaskDescription = value.Name;
+        }
+
+        public void AfterChange_Task(IBooking instance, ITask value)
+        {
+            if (value == null)
+                return;
+
+            if (string.IsNullOrEmpty(instance.TaskDescription) ||
+                instance.Task != null && instance.TaskDescription.Equals(instance.Task.Name))
                 instance.TaskDescription = value.Name;
         }
 
@@ -120,12 +125,12 @@ namespace JustInTime.Module.BusinessObjects
 
         public int Get_Repetition(IBooking instance)
         {
-            return repetition;
+            return _repetition;
         }
 
         public void Set_Repetition(IBooking instance, int value)
         {
-            repetition = value;
+            _repetition = value;
         }
 
         public TimeSpan Get_TimeDifference(IBooking instance)
@@ -135,12 +140,12 @@ namespace JustInTime.Module.BusinessObjects
 
         public bool Get_IgnoreWeekendAndHolidays(IBooking instance)
         {
-            return ignoreWeekendAndHolidays;
+            return _ignoreWeekendAndHolidays;
         }
 
         public void Set_IgnoreWeekendAndHolidays(IBooking instance, bool value)
         {
-            ignoreWeekendAndHolidays = value;
+            _ignoreWeekendAndHolidays = value;
         }
     }
 }

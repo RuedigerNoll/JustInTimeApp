@@ -12,7 +12,7 @@ namespace JustInTime.Module.Controllers
 {
     public partial class BookingViewController : ViewController
     {
-        IObjectSpace _currentObjectSpace = null;
+        IObjectSpace _currentObjectSpace;
         public BookingViewController()
         {
             InitializeComponent();
@@ -30,9 +30,8 @@ namespace JustInTime.Module.Controllers
         {
             var editDate = DateTime.Today;
             if ((View.CurrentObject) != null)
-                editDate = (View.CurrentObject as IBooking).Date;
+                editDate = ((IBooking) View.CurrentObject).Date;
                     
-            //_currentObjectSpace = ObjectSpace.CreateNestedObjectSpace();
             _currentObjectSpace = Application.CreateObjectSpace();
 
             var currentUser = ObjectSpace.GetObject(SecuritySystem.CurrentUser);
@@ -76,40 +75,37 @@ namespace JustInTime.Module.Controllers
 
         private void SaveBooking(IBooking booking)
         {
-            int j = 0;
-            DateTime nextDate = booking.Date;
+            var j = 0;
+            var nextDate = booking.Date;
 
             NextFinancialDate(booking, ref j, ref nextDate);
             booking.Date = nextDate;
 
-            if (booking.Repetition > 1)
+            if (booking.Repetition <= 1) return;
+
+            j = 1;
+            for (var i = 1; i < booking.Repetition; i++)
             {
-                j = 1;
-                for (int i = 1; i < booking.Repetition; i++)
-                {
-                    var nextBooking = _currentObjectSpace.CreateObject<IBooking>();
-                    nextBooking.Project = booking.Project;
-                    nextBooking.StartTime = booking.StartTime;
-                    nextBooking.Task = booking.Task;
-                    nextBooking.TaskDescription = booking.TaskDescription;
-                    nextBooking.Customer = booking.Customer;
-                    nextBooking.Employee = booking.Employee;
+                var nextBooking = _currentObjectSpace.CreateObject<IBooking>();
+                nextBooking.Project = booking.Project;
+                nextBooking.StartTime = booking.StartTime;
+                nextBooking.Task = booking.Task;
+                nextBooking.TaskDescription = booking.TaskDescription;
+                nextBooking.Customer = booking.Customer;
+                nextBooking.Employee = booking.Employee;
 
-                    nextDate = booking.Date.AddDays(j);
+                nextDate = booking.Date.AddDays(j);
 
-                    NextFinancialDate(booking, ref j, ref nextDate);
+                NextFinancialDate(booking, ref j, ref nextDate);
 
-                    nextBooking.Date = nextDate;
-                    nextBooking.EndTime = booking.EndTime;
-                    j++;
-                }
-
-                _currentObjectSpace.CommitChanges();
-                ObjectSpace.CommitChanges();
-                ObjectSpace.Refresh();
+                nextBooking.Date = nextDate;
+                nextBooking.EndTime = booking.EndTime;
+                j++;
             }
 
-            return;
+            _currentObjectSpace.CommitChanges();
+            ObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
         }
 
         private void DialogCanceled()
@@ -171,41 +167,37 @@ namespace JustInTime.Module.Controllers
         {
             var booking = e.AcceptActionArgs.CurrentObject as IBooking;
 
-            int j = 0;
-            DateTime nextDate = booking.Date;
+            var j = 0;
+            var nextDate = booking.Date;
                         
             NextFinancialDate(booking, ref j, ref nextDate);
             booking.Date = nextDate;
 
-            if (booking.Repetition > 1)
+            if (booking.Repetition <= 1) return;
+
+            j = 1;
+            for (var i = 1; i < booking.Repetition; i++)
             {
-                j = 1;
-                for (int i = 1; i < booking.Repetition; i++)
-                {
-                    var nextBooking = _currentObjectSpace.CreateObject<IBooking>();
-                    nextBooking.Project = booking.Project;
-                    nextBooking.StartTime = booking.StartTime;
-                    nextBooking.Task = booking.Task;
-                    nextBooking.TaskDescription = booking.TaskDescription;
-                    nextBooking.Customer = booking.Customer;
-                    nextBooking.Employee = booking.Employee;
+                var nextBooking = _currentObjectSpace.CreateObject<IBooking>();
+                nextBooking.Project = booking.Project;
+                nextBooking.StartTime = booking.StartTime;
+                nextBooking.Task = booking.Task;
+                nextBooking.TaskDescription = booking.TaskDescription;
+                nextBooking.Customer = booking.Customer;
+                nextBooking.Employee = booking.Employee;
 
-                    nextDate = booking.Date.AddDays(j);
+                nextDate = booking.Date.AddDays(j);
 
-                    NextFinancialDate(booking, ref j, ref nextDate);
+                NextFinancialDate(booking, ref j, ref nextDate);
 
-                    nextBooking.Date = nextDate;
-                    nextBooking.EndTime = booking.EndTime;
-                    j++;                    
-                }
-
-                _currentObjectSpace.CommitChanges();
-                //ObjectSpace.CommitChanges();
-                ObjectSpace.Refresh();
-
+                nextBooking.Date = nextDate;
+                nextBooking.EndTime = booking.EndTime;
+                j++;                    
             }
 
-            return;
+            _currentObjectSpace.CommitChanges();
+            //ObjectSpace.CommitChanges();
+            ObjectSpace.Refresh();
         }
 
         /// <summary>
