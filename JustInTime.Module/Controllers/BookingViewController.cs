@@ -20,7 +20,7 @@ namespace JustInTime.Module.Controllers
             TargetObjectType = typeof(IBooking);
             TargetViewType = ViewType.ListView;
         }
-
+       
         /// <summary>
         /// 
         /// </summary>

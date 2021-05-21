@@ -96,6 +96,12 @@ namespace JustInTime.Module.BusinessObjects
             }
 
             instance.Task = objectSpace.FindObject<ITask>(CriteriaOperator.Parse("Default == true"));
+
+            if (instance.Task != null)
+                instance.TaskDescription = instance.TaskDescription = 
+                    !string.IsNullOrEmpty(instance.Task.DefaultTaskDescription) 
+                        ? instance.Task.DefaultTaskDescription 
+                        : instance.Task.Name; ;
         }
 
         public void BeforeChange_Task(IBooking instance, ITask value)
@@ -105,7 +111,9 @@ namespace JustInTime.Module.BusinessObjects
 
             if (string.IsNullOrEmpty(instance.TaskDescription) ||
                 instance.Task != null && instance.TaskDescription.Equals(instance.Task.Name))
-                instance.TaskDescription = value.Name;
+                instance.TaskDescription = !string.IsNullOrEmpty(value.DefaultTaskDescription) 
+                    ? value.DefaultTaskDescription 
+                    : value.Name;
         }
 
         public void AfterChange_Task(IBooking instance, ITask value)
@@ -115,12 +123,14 @@ namespace JustInTime.Module.BusinessObjects
 
             if (string.IsNullOrEmpty(instance.TaskDescription) ||
                 instance.Task != null && instance.TaskDescription.Equals(instance.Task.Name))
-                instance.TaskDescription = value.Name;
+                instance.TaskDescription = !string.IsNullOrEmpty(value.DefaultTaskDescription) 
+                    ? value.DefaultTaskDescription
+                    : value.Name;
         }
 
         public string Get_YearMonth(IBooking instance)
         {
-            return string.Format("{0}-{1:D2}", instance.Date.Year, instance.Date.Month);
+            return $"{instance.Date.Year}-{instance.Date.Month:D2}";
         }
 
         public int Get_Repetition(IBooking instance)
